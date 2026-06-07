@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a0f">
+<title>Sofia AI — 30 Days Free for El Paso HVAC</title>
+<meta name="description" content="Sofia is a bilingual AI receptionist for El Paso HVAC. She answers every call 24/7 in English & Spanish on your own number, texts you the lead instantly, follows up on quotes, reminds customers of appointments, and asks for the Google review after the job. Try her free for 30 days.">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#0a0a0f; --surface:#13131a; --border:#1e1e2e;
+    --amber:#f59e0b; --amber-dim:rgba(245,158,11,.10); --amber-border:rgba(245,158,11,.28);
+    --white:#f1f5f9; --text:#cbd5e1; --muted:#6b7280;
+    --green:#22c55e; --green-dim:rgba(34,197,94,.07); --green-border:rgba(34,197,94,.22);
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica Neue,sans-serif;background:var(--bg);color:var(--white);line-height:1.55;font-size:17px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:600px;margin:0 auto;padding:0 18px}
+  a{color:var(--amber);text-decoration:none}
+  nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 18px;background:rgba(10,10,15,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .logo{font-size:1.05rem;font-weight:800;letter-spacing:-.02em}
+  .logo span{color:var(--amber)}
+  .lang{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+  .lang button{background:transparent;border:0;color:var(--muted);font-size:.7rem;font-weight:700;letter-spacing:.05em;padding:6px 11px;cursor:pointer;font-family:inherit}
+  .lang button.on{background:var(--amber);color:#000}
+  /* hero */
+  .hero{text-align:center;padding:46px 0 8px;position:relative}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(245,158,11,.14) 0%,transparent 62%);pointer-events:none}
+  .badge{position:relative;display:inline-block;background:var(--amber-dim);border:1px solid var(--amber-border);color:var(--amber);padding:6px 15px;border-radius:100px;font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:18px}
+  .hero h1{position:relative;font-size:clamp(2.1rem,7.5vw,3rem);font-weight:900;line-height:1.07;letter-spacing:-.035em;margin-bottom:14px}
+  .hero h1 .hl{color:var(--amber)}
+  .hero p.sub{position:relative;color:var(--text);font-size:1.06rem;max-width:500px;margin:0 auto 24px}
+  .hero p.sub strong{color:var(--white)}
+  .btn{display:inline-block;background:var(--amber);color:#000;font-weight:800;font-size:1.06rem;padding:15px 32px;border-radius:9px;cursor:pointer;border:0;font-family:inherit;transition:opacity .15s}
+  .btn:hover{opacity:.9}
+  .btn.block{display:block;width:100%;text-align:center}
+  .sublink{display:block;margin-top:11px;font-size:.82rem;color:var(--muted)}
+  /* capabilities */
+  .sec{padding:26px 0 8px}
+  .sec h2{font-size:1.35rem;font-weight:800;letter-spacing:-.02em;text-align:center;margin-bottom:18px}
+  .caps{display:flex;flex-direction:column;gap:10px}
+  .cap{display:flex;gap:13px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+  .cap .ic{font-size:1.4rem;flex-shrink:0;line-height:1.25}
+  .cap .tx{font-size:.93rem;color:var(--text);line-height:1.4}
+  .cap .tx b{color:var(--white)}
+  /* vsl */
+  .vsl{position:relative;padding-bottom:56.25%;height:0;border-radius:13px;overflow:hidden;border:1px solid var(--border);margin-bottom:8px}
+  .vsl iframe{position:absolute;top:0;left:0;width:100%;height:100%}
+  .vsl-cap{text-align:center;font-size:.8rem;color:var(--muted)}
+  /* deal */
+  .deal{background:linear-gradient(160deg,rgba(245,158,11,.10),var(--surface) 62%);border:1px solid var(--amber-border);border-radius:16px;padding:26px 24px;text-align:center;margin-top:6px}
+  .deal .big{font-size:1.9rem;font-weight:900;letter-spacing:-.03em;color:var(--amber);margin-bottom:8px}
+  .deal p{font-size:.95rem;color:var(--text);line-height:1.65;max-width:460px;margin:0 auto 16px}
+  .deal p strong{color:var(--white)}
+  .guar{font-size:.85rem;color:var(--muted);margin-top:14px;line-height:1.6}
+  .trust{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;color:var(--muted);font-size:.78rem;margin:22px 0 6px}
+  .trust span{display:inline-flex;gap:6px;align-items:center}
+  footer{border-top:1px solid var(--border);margin-top:26px;padding:20px 0 38px;text-align:center;color:var(--muted);font-size:.78rem}
+  footer .big{color:var(--white);font-weight:700;font-size:.98rem;margin-bottom:4px}
+  .es{display:none}
+  body.lang-es .en{display:none}
+  body.lang-es .es{display:inline}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Sofia <span>AI</span> · HVAC</div>
+  <div class="lang">
+    <button id="b-en" class="on" onclick="setLang('en')">EN</button>
+    <button id="b-es" onclick="setLang('es')">ES</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="badge"><span class="en">El Paso HVAC · 30 Days Free</span><span class="es">Aire El Paso · 30 Días Gratis</span></div>
+    <h1>
+      <span class="en">Sofia answers every call. <span class="hl">You keep every customer.</span></span>
+      <span class="es">Sofia contesta cada llamada. <span class="hl">Usted se queda con cada cliente.</span></span>
+    </h1>
+    <p class="sub">
+      <span class="en">A bilingual AI receptionist built for El Paso HVAC. She answers <strong>24/7 in English and Spanish — on your own number</strong> — and texts you the lead before the caller hangs up.</span>
+      <span class="es">Una recepcionista con inteligencia artificial, bilingüe, hecha para el aire de El Paso. Contesta <strong>24/7 en inglés y español — en su propio número</strong> — y le manda al cliente antes de que cuelguen.</span>
+    </p>
+    <a class="btn" href="{{BOOK_URL}}"><span class="en">Try Sofia free for 30 days →</span><span class="es">Pruebe a Sofia gratis 30 días →</span></a>
+    <span class="sublink"><span class="en">El Paso HVAC only · a few founding spots</span><span class="es">Solo aire en El Paso · pocos lugares fundadores</span></span>
+  </section>
+
+  <section class="sec">
+    <h2><span class="en">What Sofia does for you</span><span class="es">Lo que Sofia hace por usted</span></h2>
+    <div class="caps">
+      <div class="cap"><div class="ic">📞</div><div class="tx"><b><span class="en">Answers every call, 24/7</span><span class="es">Contesta cada llamada, 24/7</span></b> — <span class="en">English &amp; Spanish, on your same number. No voicemail, no lost customers.</span><span class="es">inglés y español, en su mismo número. Sin buzón, sin clientes perdidos.</span></div></div>
+      <div class="cap"><div class="ic">📲</div><div class="tx"><b><span class="en">Texts you the lead instantly</span><span class="es">Le manda el cliente al instante</span></b> — <span class="en">name, problem, and address, the second she hangs up.</span><span class="es">nombre, problema y dirección, en cuanto cuelga.</span></div></div>
+      <div class="cap"><div class="ic">💬</div><div class="tx"><b><span class="en">Follows up on your quotes</span><span class="es">Da seguimiento a sus cotizaciones</span></b> — <span class="en">so the estimate you sent doesn't go cold.</span><span class="es">para que el presupuesto que envió no se enfríe.</span></div></div>
+      <div class="cap"><div class="ic">🗓️</div><div class="tx"><b><span class="en">Reminds customers of appointments</span><span class="es">Les recuerda sus citas a los clientes</span></b> — <span class="en">fewer no-shows, fuller schedule.</span><span class="es">menos faltas, agenda más llena.</span></div></div>
+      <div class="cap"><div class="ic">⭐</div><div class="tx"><b><span class="en">Asks for the Google review after the job</span><span class="es">Pide la reseña de Google al terminar</span></b> — <span class="en">stacks your 5-star ranking automatically.</span><span class="es">sube sus 5 estrellas automáticamente.</span></div></div>
+      <div class="cap"><div class="ic">🚨</div><div class="tx"><b><span class="en">Flags the emergencies</span><span class="es">Marca las emergencias</span></b> — <span class="en">a no-cool call in 105° heat gets sent to you as urgent.</span><span class="es">una llamada sin aire en pleno calor le llega marcada como urgente.</span></div></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2><span class="en">Hear Sofia on a real call</span><span class="es">Escuche a Sofia en una llamada real</span></h2>
+    <div class="vsl"><iframe src="https://www.loom.com/embed/5e08a480ede747a2bde9530f7b21a2f7" frameborder="0" allowfullscreen></iframe></div>
+    <p class="vsl-cap"><span class="en">▲ 60 seconds — she even switches to Spanish mid-call.</span><span class="es">▲ 60 segundos — hasta cambia a español a media llamada.</span></p>
+  </section>
+
+  <section class="sec">
+    <div class="deal">
+      <div class="big"><span class="en">30 days free.</span><span class="es">30 días gratis.</span></div>
+      <p><span class="en">No catch. I'm putting Sofia on a few El Paso HVAC shops free for 30 days — I want local pros running her on real calls before I scale. <strong>Her own number on your line, answering today.</strong></span><span class="es">Sin trampa. Estoy poniendo a Sofia en unos cuantos negocios de aire en El Paso, gratis por 30 días — quiero que profesionales locales la prueben en llamadas reales antes de crecer. <strong>Su propia línea contestando hoy mismo.</strong></span></p>
+      <a class="btn block" href="{{BOOK_URL}}"><span class="en">Claim a founding spot →</span><span class="es">Aparte un lugar fundador →</span></a>
+      <div class="guar"><span class="en">🛡️ If she ever drops a call she should've caught, text me one word and you're out. No contract.</span><span class="es">🛡️ Si alguna vez deja ir una llamada que debió contestar, me manda una palabra y queda fuera. Sin contrato.</span></div>
+    </div>
+    <div class="trust">
+      <span>🗣️ <span class="en">English &amp; Spanish</span><span class="es">Inglés y español</span></span>
+      <span>⏱️ <span class="en">Answers 24/7</span><span class="es">Contesta 24/7</span></span>
+      <span>📍 <span class="en">Local · El Paso</span><span class="es">Local · El Paso</span></span>
+    </div>
+  </section>
+
+  <footer>
+    <div class="big">Sofia AI · El Paso HVAC</div>
+    <div><span class="en">Built for El Paso heat — and your Spanish-speaking callers.</span><span class="es">Hecha para el calor de El Paso — y sus clientes que hablan español.</span></div>
+    <div style="margin-top:7px"><a href="{{REPLY_LINK}}"><span class="en">Questions? Text me →</span><span class="es">¿Preguntas? Mándeme mensaje →</span></a></div>
+  </footer>
+
+</div>
+
+<script>
+  /* ===================== CONFIG — set these before sharing ===================== */
+  const CONFIG = {
+    BOOK_URL:    "",                    // ← your Calendly / booking link (blank = falls back to texting you)
+    REPLY_PHONE: "+19150000000",        // ← your reply line (E.164)
+    REPLY_DISPLAY: "(915) 000-0000",
+  };
+  /* ============================================================================ */
+  const reply = "sms:" + CONFIG.REPLY_PHONE;
+  const book  = CONFIG.BOOK_URL ? CONFIG.BOOK_URL : reply;
+  document.body.innerHTML = document.body.innerHTML
+    .replaceAll("{{BOOK_URL}}", book)
+    .replaceAll("{{REPLY_LINK}}", reply);
+
+  function setLang(l){
+    document.body.classList.toggle('lang-es', l==='es');
+    document.getElementById('b-en').classList.toggle('on', l==='en');
+    document.getElementById('b-es').classList.toggle('on', l==='es');
+  }
+  if((navigator.language||'').toLowerCase().startsWith('es')) setLang('es');
+</script>
+</body>
+</html>

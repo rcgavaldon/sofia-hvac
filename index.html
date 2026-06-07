@@ -107,6 +107,39 @@
     <p class="vsl-cap"><span class="en">▲ 60 seconds — she even switches to Spanish mid-call.</span><span class="es">▲ 60 segundos — hasta cambia a español a media llamada.</span></p>
   </section>
 
+  <!-- TEST IT YOURSELF -->
+  <section class="sec">
+    <h2><span class="en">Now test her yourself</span><span class="es">Ahora pruébela usted</span></h2>
+    <p class="sub"><span class="en">Tap and talk to Sofia live — speak English or Spanish, ask about a no-cool AC.</span><span class="es">Toque y hable con Sofia en vivo — en inglés o español, pregúntele por un aire que no enfría.</span></p>
+    <a id="talk-btn" class="btn block" href="tel:{{DEMO_TEL}}" style="text-decoration:none">🎙️ <span class="en">Call Sofia &amp; test her live</span><span class="es">Llame a Sofia y pruébela en vivo</span></a>
+    <div style="text-align:center;font-size:.82rem;color:var(--muted);margin-top:8px"><span class="en">Tap to call the live HVAC demo — {{DEMO_DISPLAY}}. Ask about an AC that won't cool, in English or Spanish.</span><span class="es">Toque para llamar al demo de aire — {{DEMO_DISPLAY}}. Pregúntele por un aire que no enfría, en inglés o español.</span></div>
+
+    <h3 style="text-align:center;font-size:1.05rem;font-weight:800;margin:24px 0 4px"><span class="en">And here's what every call produces</span><span class="es">Y esto es lo que produce cada llamada</span></h3>
+    <p class="vsl-cap" style="margin-bottom:14px"><span class="en">Left: what YOU get on WhatsApp. Right: what your CUSTOMER gets. (Above: a real call.)</span><span class="es">Izquierda: lo que USTED recibe por WhatsApp. Derecha: lo que recibe su CLIENTE. (Arriba: una llamada real.)</span></p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="background:#111c11;border:1px solid #1f3d1f;border-radius:13px;padding:14px">
+        <div style="font-size:.72rem;font-weight:800;color:#4ade80;margin-bottom:10px">📱 <span class="en">You — on WhatsApp</span><span class="es">Usted — por WhatsApp</span></div>
+        <div style="font-size:.78rem;line-height:1.5;color:#d1fae5">
+          <div><span style="color:#6b7280">Name:</span> Carlos Mendez</div>
+          <div><span style="color:#6b7280">Phone:</span> (915) 555-0142</div>
+          <div><span style="color:#6b7280">Address:</span> 2847 Mesa Hills Dr</div>
+          <div><span style="color:#6b7280"><span class="en">Problem:</span><span class="es">Problema:</span></span> <span class="en">AC not cooling</span><span class="es">Aire no enfría</span></div>
+          <div><span style="color:#6b7280"><span class="en">Urgency:</span><span class="es">Urgencia:</span></span> <span style="color:#f87171;font-weight:700">🔴 <span class="en">No cooling · 104°</span><span class="es">Sin aire · 104°</span></span></div>
+        </div>
+        <div style="display:flex;gap:5px;margin-top:10px">
+          <span style="flex:1;text-align:center;font-size:.64rem;font-weight:700;padding:7px 3px;border-radius:7px;background:rgba(74,222,128,.14);color:#4ade80;border:1px solid rgba(74,222,128,.3)">✅ <span class="en">On my way</span><span class="es">En camino</span></span>
+          <span style="flex:1;text-align:center;font-size:.64rem;font-weight:700;padding:7px 3px;border-radius:7px;background:rgba(96,165,250,.14);color:#60a5fa;border:1px solid rgba(96,165,250,.3)">📅 <span class="en">Schedule</span><span class="es">Agendar</span></span>
+        </div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:14px">
+        <div style="font-size:.72rem;font-weight:800;color:var(--amber);margin-bottom:10px">💬 <span class="en">Your customer — by text</span><span class="es">Su cliente — por mensaje</span></div>
+        <div style="background:#1e2937;border-radius:12px 12px 12px 3px;padding:11px 13px;font-size:.8rem;line-height:1.55;color:#e2e8f0">
+          <span class="en">Hi Carlos, this is Sofia with El Paso Cooling. Got your AC-not-cooling request at 2847 Mesa Hills — someone will reach out shortly to confirm. Reply STOP to opt out.</span><span class="es">Hola Carlos, le habla Sofia de El Paso Cooling. Recibí su solicitud de aire que no enfría en 2847 Mesa Hills — alguien le contacta en breve para confirmar. Responda STOP para no recibir mensajes.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="sec">
     <div class="deal">
       <div class="big"><span class="en">30 days free.</span><span class="es">30 días gratis.</span></div>
@@ -135,13 +168,17 @@
     BOOK_URL:    "https://calendly.com/rcgavaldon-rgaibiz/ai-receptionisnt-hvac-free-30-days",  // booking link
     REPLY_PHONE: "+19150000000",        // ← your reply line (E.164) — still a placeholder, give me your real # to wire the footer "text me"
     REPLY_DISPLAY: "(915) 000-0000",
+    DEMO_TEL:     "+19150000000",        // ← the pre-provisioned HVAC demo number (provision a demo client, KEEP the Twilio #, send it to me)
+    DEMO_DISPLAY: "(915) 000-0000",
   };
   /* ============================================================================ */
   const reply = "sms:" + CONFIG.REPLY_PHONE;
   const book  = CONFIG.BOOK_URL ? CONFIG.BOOK_URL : reply;
   document.body.innerHTML = document.body.innerHTML
     .replaceAll("{{BOOK_URL}}", book)
-    .replaceAll("{{REPLY_LINK}}", reply);
+    .replaceAll("{{REPLY_LINK}}", reply)
+    .replaceAll("{{DEMO_TEL}}", CONFIG.DEMO_TEL)
+    .replaceAll("{{DEMO_DISPLAY}}", CONFIG.DEMO_DISPLAY);
 
   function setLang(l){
     document.body.classList.toggle('lang-es', l==='es');

@@ -62,6 +62,11 @@
   body.lang-es .en{display:none}
   body.lang-es .es{display:inline}
 </style>
+<script type="module">
+  // Retell web-call SDK — lets a visitor talk to Sofia live in the browser
+  import { RetellWebClient } from "https://esm.sh/retell-client-js-sdk";
+  window.RetellWebClient = RetellWebClient;
+</script>
 </head>
 <body>
 
@@ -89,6 +94,17 @@
     <span class="sublink"><span class="en">El Paso HVAC only · a few founding spots</span><span class="es">Solo aire en El Paso · pocos lugares fundadores</span></span>
   </section>
 
+  <!-- TALK TO SOFIA — front and center -->
+  <section class="sec" style="padding-top:10px">
+    <div style="background:linear-gradient(160deg,rgba(245,158,11,.11),var(--surface) 60%);border:1px solid var(--amber-border);border-radius:16px;padding:22px 20px;text-align:center">
+      <h2 style="font-size:1.35rem;font-weight:800;letter-spacing:-.02em;margin-bottom:6px"><span class="en">🎙️ Talk to Sofia right now</span><span class="es">🎙️ Hable con Sofia ahora mismo</span></h2>
+      <p style="font-size:.93rem;color:var(--text);margin-bottom:16px;max-width:440px;margin-left:auto;margin-right:auto"><span class="en">No phone call — tap, allow your mic, and have a real conversation. English or Spanish. Ask about an AC that won't cool.</span><span class="es">Sin llamada — toque, permita su micrófono, y tenga una conversación real. En inglés o español. Pregúntele por un aire que no enfría.</span></p>
+      <button id="web-btn" class="btn block" onclick="talkWeb()" style="border:0">🎙️ <span class="en">Talk to Sofia in your browser</span><span class="es">Hablar con Sofia en el navegador</span></button>
+      <div id="web-status" style="font-size:.82rem;color:var(--muted);min-height:20px;margin-top:10px"></div>
+      <div style="font-size:.82rem;color:var(--muted);margin-top:2px"><span class="en">Rather call? </span><span class="es">¿Mejor llamar? </span><a href="tel:{{DEMO_TEL}}">{{DEMO_DISPLAY}}</a></div>
+    </div>
+  </section>
+
   <section class="sec">
     <h2><span class="en">What Sofia does for you</span><span class="es">Lo que Sofia hace por usted</span></h2>
     <div class="caps">
@@ -107,15 +123,10 @@
     <p class="vsl-cap"><span class="en">▲ 60 seconds — she even switches to Spanish mid-call.</span><span class="es">▲ 60 segundos — hasta cambia a español a media llamada.</span></p>
   </section>
 
-  <!-- TEST IT YOURSELF -->
+  <!-- WHAT EVERY CALL PRODUCES -->
   <section class="sec">
-    <h2><span class="en">Now test her yourself</span><span class="es">Ahora pruébela usted</span></h2>
-    <p class="sub"><span class="en">Tap and talk to Sofia live — speak English or Spanish, ask about a no-cool AC.</span><span class="es">Toque y hable con Sofia en vivo — en inglés o español, pregúntele por un aire que no enfría.</span></p>
-    <a id="talk-btn" class="btn block" href="tel:{{DEMO_TEL}}" style="text-decoration:none">🎙️ <span class="en">Call Sofia &amp; test her live</span><span class="es">Llame a Sofia y pruébela en vivo</span></a>
-    <div style="text-align:center;font-size:.82rem;color:var(--muted);margin-top:8px"><span class="en">Tap to call the live HVAC demo — {{DEMO_DISPLAY}}. Ask about an AC that won't cool, in English or Spanish.</span><span class="es">Toque para llamar al demo de aire — {{DEMO_DISPLAY}}. Pregúntele por un aire que no enfría, en inglés o español.</span></div>
-
-    <h3 style="text-align:center;font-size:1.05rem;font-weight:800;margin:24px 0 4px"><span class="en">And here's what every call produces</span><span class="es">Y esto es lo que produce cada llamada</span></h3>
-    <p class="vsl-cap" style="margin-bottom:14px"><span class="en">Left: what YOU get on WhatsApp. Right: what your CUSTOMER gets. (Above: a real call.)</span><span class="es">Izquierda: lo que USTED recibe por WhatsApp. Derecha: lo que recibe su CLIENTE. (Arriba: una llamada real.)</span></p>
+    <h2><span class="en">What every call produces</span><span class="es">Lo que produce cada llamada</span></h2>
+    <p class="vsl-cap" style="margin-bottom:14px"><span class="en">Left: what YOU get on WhatsApp. Right: what your CUSTOMER gets. (A real call is right above.)</span><span class="es">Izquierda: lo que USTED recibe por WhatsApp. Derecha: lo que recibe su CLIENTE. (Una llamada real está justo arriba.)</span></p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
       <div style="background:#111c11;border:1px solid #1f3d1f;border-radius:13px;padding:14px">
         <div style="font-size:.72rem;font-weight:800;color:#4ade80;margin-bottom:10px">📱 <span class="en">You — on WhatsApp</span><span class="es">Usted — por WhatsApp</span></div>
@@ -170,6 +181,7 @@
     REPLY_DISPLAY: "(915) 226-9501",
     DEMO_TEL:     "+19152867434",        // LIVE HVAC Sofia demo line (hvactest1) — callers reach Sofia HVAC
     DEMO_DISPLAY: "(915) 286-7434",
+    WEBCALL_URL:  "https://roberto-gavaldon3--sofia-ai-voice-serve.modal.run/demo/web-call",
   };
   /* ============================================================================ */
   const reply = "sms:" + CONFIG.REPLY_PHONE;
@@ -186,6 +198,26 @@
     document.getElementById('b-es').classList.toggle('on', l==='es');
   }
   if((navigator.language||'').toLowerCase().startsWith('es')) setLang('es');
+
+  window.talkWeb = async function(){
+    var status=document.getElementById('web-status'); var btn=document.getElementById('web-btn');
+    var es = document.body.classList.contains('lang-es');
+    if(window._rcLive){ try{ window._rc.stopCall(); }catch(e){} return; }
+    if(!window.RetellWebClient){ status.textContent = es?'Cargando… intente de nuevo en un segundo.':'Loading the call client… try again in a second.'; return; }
+    status.textContent = es?'Conectando… permita su micrófono.':'Connecting… please allow your microphone.';
+    try{
+      var resp = await fetch(CONFIG.WEBCALL_URL);
+      var data = await resp.json();
+      if(!data.access_token) throw new Error('no token');
+      var rc = new window.RetellWebClient(); window._rc = rc;
+      rc.on('call_started', function(){ window._rcLive=true; status.textContent = es?'🔴 En vivo — hable con Sofia. Toque para terminar.':'🔴 Live — talk to Sofia. Tap again to end.'; btn.innerHTML='⏹ '+(es?'Terminar llamada':'End call'); });
+      rc.on('call_ended', function(){ window._rcLive=false; status.textContent = es?'Llamada terminada. Toque para hablar otra vez.':'Call ended. Tap to talk again.'; btn.innerHTML='🎙️ '+(es?'Hablar con Sofia en el navegador':'Talk to Sofia in your browser'); });
+      rc.on('error', function(){ window._rcLive=false; status.textContent = (es?'Problema al conectar — o llame al ':'Trouble connecting — or just call ')+CONFIG.DEMO_DISPLAY+'.'; });
+      await rc.startCall({ accessToken: data.access_token });
+    }catch(e){
+      status.textContent = (es?'La llamada en navegador no está disponible aquí — llame al ':'Browser call not available on this device — call ')+CONFIG.DEMO_DISPLAY+'.';
+    }
+  };
 </script>
 </body>
 </html>
